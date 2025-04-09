@@ -15,13 +15,11 @@
 ![Python](https://img.shields.io/badge/Python-3.10%2B-blue)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
 [![](https://dcbadge.limes.pink/api/server/YuMNeuKStr?style=flat)](https://discord.gg/YuMNeuKStr) <br>
-[![Docs](https://github.com/mozilla-ai/blueprint-template/actions/workflows/docs.yaml/badge.svg)](https://github.com/mozilla-ai/blueprint-template/actions/workflows/docs.yaml/)
-[![Tests](https://github.com/mozilla-ai/blueprint-template/actions/workflows/tests.yaml/badge.svg)](https://github.com/mozilla-ai/blueprint-template/actions/workflows/tests.yaml/)
-[![Ruff](https://github.com/mozilla-ai/blueprint-template/actions/workflows/lint.yaml/badge.svg?label=Ruff)](https://github.com/mozilla-ai/blueprint-template/actions/workflows/lint.yaml/)
+[![Docs](https://github.com/mozilla-ai/document-to-markdown/actions/workflows/docs.yaml/badge.svg)](https://github.com/mozilla-ai/document-to-markdown/actions/workflows/docs.yaml/)
 
-[Blueprints Hub](https://developer-hub.mozilla.ai/)
-| [Documentation](https://mozilla-ai.github.io/Blueprint-template/)
-| [Getting Started](https://mozilla-ai.github.io/Blueprint-template/getting-started)
+[Blueprints Hub](https://blueprints.mozilla.ai/)
+| [Documentation](https://mozilla-ai.github.io/document-to-markdown/)
+| [Getting Started](https://mozilla-ai.github.io/document-to-markdown/getting-started)
 | [Contributing](CONTRIBUTING.md)
 
 </div>
