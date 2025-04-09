@@ -15,11 +15,9 @@
 ![Python](https://img.shields.io/badge/Python-3.10%2B-blue)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
 [![](https://dcbadge.limes.pink/api/server/YuMNeuKStr?style=flat)](https://discord.gg/YuMNeuKStr) <br>
-[![Docs](https://github.com/mozilla-ai/document-to-markdown/actions/workflows/docs.yaml/badge.svg)](https://github.com/mozilla-ai/document-to-markdown/actions/workflows/docs.yaml/)
 
 [Blueprints Hub](https://blueprints.mozilla.ai/)
-| [Documentation](https://mozilla-ai.github.io/document-to-markdown/)
-| [Getting Started](https://mozilla-ai.github.io/document-to-markdown/getting-started)
+| [Documentation](https://github.com/mozilla-ai/document-to-markdown/README.md)
 | [Contributing](CONTRIBUTING.md)
 
 </div>
