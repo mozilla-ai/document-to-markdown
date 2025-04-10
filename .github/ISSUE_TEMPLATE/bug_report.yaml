@@ -2,7 +2,7 @@ name: "\U0001F41B Bug Report"
 description: Submit a bug report to help us improve
 title: "[BUG]: "
 projects:
-  - "project-name"
+  - "document-to-markdown"
 labels:
   - bug
 body:
@@ -10,7 +10,7 @@ body:
     attributes:
       value: |
         Thanks for taking the time to fill out this bug report!
-        Please make sure you have searched for a similar [issue](https://github.com/mozilla-ai/project-name/issues) before submitting a new one.
+        Please make sure you have searched for a similar [issue](https://github.com/mozilla-ai/document-to-markdown/issues) before submitting a new one.
 
   - type: textarea
     id: description
@@ -62,7 +62,7 @@ body:
       description: Please share your system info with us.
       placeholder: |
         - OS: [e.g., macOS Sonoma]
-        - Project-name version: [e.g. commit SHA]
+        - document-to-markdown version: [e.g. commit SHA]
     validations:
       required: true
 

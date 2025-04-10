@@ -3,15 +3,12 @@ requires = ["setuptools>=48", "setuptools_scm[toml]>=6.3.1"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "blueprint"
+name = "document-to-markdown"
 readme = "README.md"
 license = {text = "Apache-2.0"}
 requires-python = ">=3.10"
 dynamic = ["version"]
-dependencies = [
-  "loguru",
-  "streamlit",
-]
+dependencies = []
 
 [project.optional-dependencies]
 docs = [
@@ -20,19 +17,14 @@ docs = [
   "mkdocstrings-python",
 ]
 
-tests = [
-  "pytest>=8,<9",
-  "pytest-sugar>=0.9.6",
-]
 
 [project.urls]
-Documentation = "https://mozilla-ai.github.io/Blueprint-template/"
-Issues = "https://github.com/mozilla-ai/Blueprint-template/issues"
-Source = "https://github.com/mozilla-ai/Blueprint-template"
+Documentation = "https://mozilla-ai.github.io/document-to-markdown/"
+Issues = "https://github.com/mozilla-ai/document-to-markdown/issues"
+Source = "https://github.com/mozilla-ai/document-to-markdown"
 
 [tool.setuptools.packages.find]
 exclude = ["tests", "tests.*"]
-where = ["src"]
 namespaces = false
 
 [tool.setuptools_scm]

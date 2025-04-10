@@ -6,12 +6,10 @@ on:
     paths:
       - mkdocs.yml
       - 'docs/**'
-      - 'src/**'
   pull_request:
     paths:
       - mkdocs.yml
       - 'docs/**'
-      - 'src/**'
   workflow_dispatch:
 
 jobs:
