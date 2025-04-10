@@ -68,11 +68,10 @@ def setup_gradio_demo():
         gr.Markdown(
             """ # Docling - OCR: Parse documents, images, spreadsheets and more to markdown or other formats!
             
-            ![docling](https://github.com/mozilla-ai/document-to-markdown/blob/main/images/docling_processing.png)
-
             Docling is very powerful tool, with lots of cool features and integrations to other AI frameworks (e.g. LlamaIndex, LangChain, and many more).
 
             Model used for picture classification: [EfficientNet-B0 Document Image Classifier](https://huggingface.co/ds4sd/DocumentFigureClassifier)
+
             Model used for picture description: [SmolVLM-256M-Instruct](https://huggingface.co/HuggingFaceTB/SmolVLM-256M-Instruct)
 
             To explore the full set of features of Docling visit: https://github.com/docling-project/docling
