@@ -1,15 +1,22 @@
 from typing import Dict, Tuple
 import os
 import gradio as gr
+import torch.cuda
 from docling.datamodel.base_models import InputFormat
-from docling.datamodel.pipeline_options import PdfPipelineOptions
+from docling.datamodel.pipeline_options import PdfPipelineOptions, AcceleratorDevice
 from docling.document_converter import DocumentConverter, PdfFormatOption
 from docling_core.types import DoclingDocument
 from docling.utils import model_downloader
 from docling.datamodel.pipeline_options import smolvlm_picture_description
 
 # Download models upon HF space initialization
+pipeline_options = PdfPipelineOptions()
+if torch.cuda.is_available():
+    print("Enabling CUDA Accelerator")
+    pipeline_options.accelerator_options.device = AcceleratorDevice.CUDA
+    pipeline_options.accelerator_options.cuda_use_flash_attention2 = True
 if os.getenv("IS_HF_SPACE"):
+    print("Downloading models...")
     model_downloader.download_models()
 
 
@@ -22,14 +29,17 @@ def parse_document(
 ) -> Tuple[DoclingDocument, str]:
     yield None, f"Parsing document... ⏳"
 
-    pipeline_options = PdfPipelineOptions()
     pipeline_options.do_code_enrichment = do_code_enrichment
     pipeline_options.do_formula_enrichment = do_formula_enrichment
     pipeline_options.generate_picture_images = do_picture_classification
     pipeline_options.images_scale = 2
     pipeline_options.do_picture_classification = do_picture_classification
+
     pipeline_options.do_picture_description = do_picture_description
     pipeline_options.picture_description_options = smolvlm_picture_description
+    pipeline_options.picture_description_options.prompt = "Describe the image in three sentences. Be concise and accurate."
+    pipeline_options.images_scale = 2.0
+    pipeline_options.generate_picture_images = True
 
     print(f"Pipeline options defined: \n\t{pipeline_options}")
     converter = DocumentConverter(
