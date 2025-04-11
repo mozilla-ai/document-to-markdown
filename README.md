@@ -13,7 +13,8 @@
 <div align="center">
 
 ![Python](https://img.shields.io/badge/Python-3.10%2B-blue)
-[![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
+[![Docling](https://img.shields.io/badge/Docling-📝-orange)](https://github.com/docling-project/docling)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![](https://dcbadge.limes.pink/api/server/YuMNeuKStr?style=flat)](https://discord.gg/YuMNeuKStr) <br>
 
 [Blueprints Hub](https://blueprints.mozilla.ai/)
@@ -22,11 +23,13 @@
 
 </div>
 
-# Converting Documents to Markdown with Docling CLI
+# Parse and convert Documents with [Docling](https://github.com/docling-project/docling)
+
+🤝 **_This Blueprint was a result of an [EleutherAI](https://www.eleuther.ai/) <> [mozilla.ai](https://www.mozilla.ai/) collaboration, as part of their work on [Open Datasets for LLM Training](https://blog.mozilla.org/en/mozilla/dataset-convening/)_**.
 
 This blueprint guides you to convert various unstructured documents (PDFs, DOCX, HTML, etc.) to Markdown format using the Docling command-line interface, with special attention to OCR capabilities and image handling options.
 
-## Pre-requisites
+### Pre-requisites
 
 - **System requirements**:
   - OS: Windows, macOS, or Linux
