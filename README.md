@@ -21,13 +21,13 @@
 | [Documentation](https://github.com/mozilla-ai/document-to-markdown/README.md)
 | [Contributing](CONTRIBUTING.md)
 
+🤝 **_This Blueprint was a result of an [EleutherAI](https://www.eleuther.ai/) <> [mozilla.ai](https://www.mozilla.ai/) collaboration, as part of their work on [Open Datasets for LLM Training](https://blog.mozilla.org/en/mozilla/dataset-convening/)_**.
+
 </div>
 
 # Parse and convert Documents with [Docling](https://github.com/docling-project/docling)
 
-🤝 **_This Blueprint was a result of an [EleutherAI](https://www.eleuther.ai/) <> [mozilla.ai](https://www.mozilla.ai/) collaboration, as part of their work on [Open Datasets for LLM Training](https://blog.mozilla.org/en/mozilla/dataset-convening/)_**.
-
-This blueprint guides you to convert various unstructured documents (PDFs, DOCX, HTML, etc.) to Markdown format using the Docling command-line interface, with special attention to OCR capabilities and image handling options.
+This blueprint guides you to convert various unstructured documents (PDFs, DOCX, HTML, etc.) to markdown, or other, formats using the Docling CLI or a locally-hosted demo UI, with special attention to OCR capabilities and image handling options.
 
 ### Pre-requisites
 
