@@ -1,9 +1,11 @@
+import json
 from typing import Dict, Tuple
 import os
 import gradio as gr
 import torch.cuda
 from docling.datamodel.base_models import InputFormat
-from docling.datamodel.pipeline_options import PdfPipelineOptions, AcceleratorDevice
+from docling.datamodel.pipeline_options import PdfPipelineOptions, AcceleratorDevice, TesseractCliOcrOptions, \
+    EasyOcrOptions, TesseractOcrOptions, RapidOcrOptions, OcrMacOptions
 from docling.document_converter import DocumentConverter, PdfFormatOption
 from docling_core.types import DoclingDocument
 from docling.utils import model_downloader
@@ -19,15 +21,25 @@ if os.getenv("IS_HF_SPACE"):
     print("Downloading models...")
     model_downloader.download_models()
 
+engines_available = {
+    "EasyOCR (Default)": EasyOcrOptions(),
+    "Tesseract": TesseractOcrOptions(),
+    "RapidOCR": RapidOcrOptions(),
+    "OcrMac (Mac only)": OcrMacOptions()
+}
+
 
 def parse_document(
     file_path: str,
+    engine: str,
     do_code_enrichment: bool,
     do_formula_enrichment: bool,
     do_picture_classification: bool,
     do_picture_description: bool,
 ) -> Tuple[DoclingDocument, str]:
     yield None, f"Parsing document... ⏳"
+
+    pipeline_options.ocr_options = engines_available[engine]
 
     pipeline_options.do_code_enrichment = do_code_enrichment
     pipeline_options.do_formula_enrichment = do_formula_enrichment
@@ -53,21 +65,30 @@ def parse_document(
     yield result.document, "Done ✅"
 
 
-def to_html(docling_doc: DoclingDocument) -> str:
-    return docling_doc.export_to_html()
+def to_html(docling_doc: DoclingDocument) -> Tuple[str, str]:
+    return docling_doc.export_to_html(), "html"
 
 
-def to_markdown(docling_doc: DoclingDocument) -> str:
-    return docling_doc.export_to_markdown()
+def to_markdown(docling_doc: DoclingDocument) -> Tuple[str, str]:
+    return docling_doc.export_to_markdown(), "md"
 
 
-def to_json(docling_doc: DoclingDocument) -> Dict:
-    return docling_doc.export_to_dict()
+def to_json(docling_doc: DoclingDocument) -> Tuple[Dict, str]:
+    return docling_doc.export_to_dict(), "json"
 
 
-def to_text(docling_doc: DoclingDocument) -> str:
-    return docling_doc.export_to_text()
+def to_text(docling_doc: DoclingDocument) -> Tuple[str, str]:
+    return docling_doc.export_to_text(), "txt"
 
+def download_file(doc: str | Dict, file_extension: str):
+    # TODO: not save locally, but download through gradio!
+    if file_extension == "json":
+        with open('doc.json', 'w') as json_file:
+            json.dump(doc, json_file, indent=4)
+    else:
+        with open(f"doc.{file_extension}", "w") as file:
+            file.write(doc)
+    return "Downloaded ✅"
 
 def upload_file(file) -> str:
     return file.name
@@ -111,6 +132,9 @@ def setup_gradio_demo():
 
             with gr.Column():
                 gr.Markdown("### 2) Configure engine & Parse")
+
+                ocr_engine = gr.Dropdown(choices=list(engines_available.keys()), label="Select OCR engine")
+
                 code_understanding = gr.Checkbox(
                     value=False, label="Enable Code understanding"
                 )
@@ -136,14 +160,19 @@ def setup_gradio_demo():
                 markdown_button = gr.Button("Convert to markdown")
                 json_button = gr.Button("Convert to JSON")
                 text_button = gr.Button("Convert to text")
+                file_extension = gr.Text(visible=False)
 
         doc = gr.State()
         output = gr.Text(label="Output")
+
+        download_button = gr.DownloadButton("Download to file")
+        download_status = gr.Markdown()
 
         parse_button.click(
             fn=parse_document,
             inputs=[
                 file_output,
+                ocr_engine,
                 code_understanding,
                 formula_enrichment,
                 picture_classification,
@@ -154,24 +183,28 @@ def setup_gradio_demo():
         html_button.click(
             fn=to_html,
             inputs=doc,
-            outputs=output,
+            outputs=[output, file_extension],
         )
         markdown_button.click(
             fn=to_markdown,
             inputs=doc,
-            outputs=output,
+            outputs=[output, file_extension],
         )
         json_button.click(
             fn=to_json,
             inputs=doc,
-            outputs=output,
+            outputs=[output, file_extension],
         )
         text_button.click(
             fn=to_text,
             inputs=doc,
-            outputs=output,
+            outputs=[output, file_extension],
         )
-
+        download_button.click(
+            fn=download_file,
+            inputs=[output, file_extension],
+            outputs=download_status,
+        )
     demo.launch()
 
 
