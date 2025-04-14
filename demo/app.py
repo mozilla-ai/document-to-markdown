@@ -12,11 +12,6 @@ from docling.utils import model_downloader
 from docling.datamodel.pipeline_options import smolvlm_picture_description
 
 # Download models upon HF space initialization
-pipeline_options = PdfPipelineOptions()
-if torch.cuda.is_available():
-    print("Enabling CUDA Accelerator")
-    pipeline_options.accelerator_options.device = AcceleratorDevice.CUDA
-    pipeline_options.accelerator_options.cuda_use_flash_attention2 = True
 if os.getenv("IS_HF_SPACE"):
     print("Downloading models...")
     model_downloader.download_models()
@@ -34,24 +29,14 @@ def parse_document(
     engine: str,
     do_code_enrichment: bool,
     do_formula_enrichment: bool,
-    do_picture_classification: bool,
-    do_picture_description: bool,
 ) -> Tuple[DoclingDocument, str]:
     yield None, f"Parsing document... ⏳"
 
+    pipeline_options = PdfPipelineOptions()
     pipeline_options.ocr_options = engines_available[engine]
 
     pipeline_options.do_code_enrichment = do_code_enrichment
     pipeline_options.do_formula_enrichment = do_formula_enrichment
-    pipeline_options.generate_picture_images = do_picture_classification
-    pipeline_options.images_scale = 2
-    pipeline_options.do_picture_classification = do_picture_classification
-
-    pipeline_options.do_picture_description = do_picture_description
-    pipeline_options.picture_description_options = smolvlm_picture_description
-    pipeline_options.picture_description_options.prompt = "Describe the image in three sentences. Be concise and accurate."
-    pipeline_options.images_scale = 2.0
-    pipeline_options.generate_picture_images = True
 
     print(f"Pipeline options defined: \n\t{pipeline_options}")
     converter = DocumentConverter(
@@ -103,10 +88,6 @@ def setup_gradio_demo():
             
             Docling is very powerful tool, with lots of cool features and integrations to other AI frameworks (e.g. LlamaIndex, LangChain, and many more).
 
-            Model used for picture classification: [EfficientNet-B0 Document Image Classifier](https://huggingface.co/ds4sd/DocumentFigureClassifier)
-
-            Model used for picture description: [SmolVLM-256M-Instruct](https://huggingface.co/HuggingFaceTB/SmolVLM-256M-Instruct)
-
             To explore the full set of features of Docling visit: https://github.com/docling-project/docling
             """
         )
@@ -144,15 +125,6 @@ def setup_gradio_demo():
                 )
                 formula_enrichment = gr.Checkbox(
                     value=False, label="Enable Formula understanding"
-                )
-                picture_classification = gr.Checkbox(
-                    value=False, label="Enable Picture classification"
-                )
-                picture_description = gr.Checkbox(
-                    value=False, label="Enable Picture description"
-                )
-                gr.Markdown(
-                    "_**Warning:** Enabling any of these features can potentially increase the processing time._"
                 )
 
                 parse_button = gr.Button("Parse document")
@@ -200,8 +172,6 @@ def setup_gradio_demo():
                 ocr_engine,
                 code_understanding,
                 formula_enrichment,
-                picture_classification,
-                picture_description,
             ],
             outputs=[doc, status],
         )
