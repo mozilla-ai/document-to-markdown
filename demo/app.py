@@ -4,7 +4,7 @@ import os
 import gradio as gr
 import torch.cuda
 from docling.datamodel.base_models import InputFormat
-from docling.datamodel.pipeline_options import PdfPipelineOptions, AcceleratorDevice, TesseractCliOcrOptions, \
+from docling.datamodel.pipeline_options import PdfPipelineOptions, AcceleratorDevice, \
     EasyOcrOptions, TesseractOcrOptions, RapidOcrOptions, OcrMacOptions
 from docling.document_converter import DocumentConverter, PdfFormatOption
 from docling_core.types import DoclingDocument
@@ -25,7 +25,7 @@ engines_available = {
     "EasyOCR (Default)": EasyOcrOptions(),
     "Tesseract": TesseractOcrOptions(),
     "RapidOCR": RapidOcrOptions(),
-    "OcrMac (Mac only)": OcrMacOptions()
+    "OcrMac (Mac only)": OcrMacOptions(),
 }
 
 
@@ -80,15 +80,17 @@ def to_json(docling_doc: DoclingDocument) -> Tuple[Dict, str]:
 def to_text(docling_doc: DoclingDocument) -> Tuple[str, str]:
     return docling_doc.export_to_text(), "txt"
 
+
 def download_file(doc: str | Dict, file_extension: str):
-    # TODO: not save locally, but download through gradio!
+    final_filename = f"doc.{file_extension}"
     if file_extension == "json":
-        with open('doc.json', 'w') as json_file:
+        with open(final_filename, "w") as json_file:
             json.dump(doc, json_file, indent=4)
     else:
-        with open(f"doc.{file_extension}", "w") as file:
+        with open(final_filename, "w") as file:
             file.write(doc)
-    return "Downloaded ✅"
+    return [final_filename, "Downloaded ✅"]
+
 
 def upload_file(file) -> str:
     return file.name
@@ -133,7 +135,9 @@ def setup_gradio_demo():
             with gr.Column():
                 gr.Markdown("### 2) Configure engine & Parse")
 
-                ocr_engine = gr.Dropdown(choices=list(engines_available.keys()), label="Select OCR engine")
+                ocr_engine = gr.Dropdown(
+                    choices=list(engines_available.keys()), label="Select OCR engine"
+                )
 
                 code_understanding = gr.Checkbox(
                     value=False, label="Enable Code understanding"
@@ -164,19 +168,29 @@ def setup_gradio_demo():
 
         doc = gr.State()
         with gr.Column():
-            output = gr.Textbox(label="Output", lines=10, interactive=False, elem_id="output-textbox")
-            gr.HTML("""
-                    <button id="copy-button" onclick="
-                        const text = document.getElementById('output-textbox').querySelector('textarea').value;
-                        navigator.clipboard.writeText(text);
-                        const copiedMsg = document.getElementById('copied-msg');
-                        copiedMsg.style.display = 'inline';
-                        setTimeout(() => copiedMsg.style.display = 'none', 1500);
-                    " style="margin-top: 10px;">📋 Copy Output</button>
-                    <span id="copied-msg" style="margin-left: 10px; color: green; display: none;">Copied!</span>
-                    """)
+            with gr.Group():
+                output = gr.Textbox(
+                    label="Output",
+                    lines=10,
+                    interactive=False,
+                    elem_id="output-textbox",
+                )
+                gr.HTML(
+                    """
+                    <div style="display: flex; flex-direction: column; align-items: center;">
+                      <button id="copy-button" onclick="const text = document.getElementById('output-textbox').querySelector('textarea').value; navigator.clipboard.writeText(text); const copiedMsg = document.getElementById('copied-msg'); copiedMsg.style.display = 'inline'; setTimeout(() => copiedMsg.style.display = 'none', 1500);" style="margin-top: 10px;">
+                        📋 Copy output to clipboard
+                      </button>
+                      <span id="copied-msg" style="margin-left: 10px; color: green; display: none;">Copied!</span>
+                    </div>
+                    """
+                )
 
-        download_button = gr.DownloadButton("Download to file")
+        download_button = gr.Button("Download to file")
+        # See https://github.com/gradio-app/gradio/issues/9230#issuecomment-2323771634 why this button
+        download_button_hidden = gr.DownloadButton(
+            visible=False, elem_id="download_btn_hidden"
+        )
         download_status = gr.Markdown()
 
         parse_button.click(
@@ -214,8 +228,14 @@ def setup_gradio_demo():
         download_button.click(
             fn=download_file,
             inputs=[output, file_extension],
-            outputs=download_status,
+            outputs=[download_button_hidden, download_status],
+        ).then(
+            fn=None,
+            inputs=None,
+            outputs=None,
+            js="() => document.querySelector('#download_btn_hidden').click()",
         )
+
     demo.launch()
 
 
