@@ -29,6 +29,45 @@
 
 This blueprint guides you to convert various unstructured documents (PDFs, DOCX, HTML, etc.) to markdown, or other, formats using the Docling CLI or a locally-hosted demo UI, with special attention to OCR capabilities and image handling options.
 
+## Table of Contents
+
+- [Parse and convert Documents with Docling](#parse-and-convert-documents-with-docling)
+  - [Quick-start](#quick-start)
+  - [How it Works](#how-it-works)
+  - [Features & Configuration](#features-configuration)
+    <details>
+    <summary>OCR Options</summary>
+
+    - [EasyOCR (Default)](#easyocr-default)
+    - [Tesseract OCR](#tesseract-ocr)
+    - [RapidOCR](#rapidocr)
+    - [OcrMac (macOS only)](#ocrmac-macos-only)
+
+    </details>
+    <details>
+    <summary>Parse Images with SmolDocling</summary>
+
+    - [Parse Images with SmolDocling](#parse-images-with-smoldocling)
+    - [Parse Code](#parse-code)
+    - [Parse Formulas](#parse-formulas)
+
+    </details>
+    <details>
+    <summary>Image Embedding Options</summary>
+
+    - [Embedded Images (Data URLs)](#embedded-images-data-urls)
+    - [Referenced Images (Default)](#referenced-images-default)
+    - [Placeholder Images](#placeholder-images)
+
+    </details>
+    
+    - [Batch Processing](#batch-processing)
+  - [Hardware requirements](#hardware-requirements)
+  - [Troubleshooting](#troubleshooting)
+    - [OCR Issues](#ocr-issues)
+  - [License](#license)
+  - [Contributing](#contributing)
+
 ## Quick-start
 
 Install Docling using pip:
@@ -62,6 +101,10 @@ Docling is a document processing tool that parses various formats and provides a
 3. **OCR Processing**: For scanned documents, it applies OCR to extract text
 4. **Markdown Conversion**: The parsed document is converted to Markdown format
 5. **Image Handling**: Images can be embedded, referenced, or replaced with placeholders
+
+## Features & Configuration
+
+**Note: These are only a few samples of the full set of features of Docling!** Visit https://github.com/docling-project/docling for an up-to-date list of all the features and configurations.
 
 ### OCR Options
 
