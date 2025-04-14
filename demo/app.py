@@ -163,7 +163,18 @@ def setup_gradio_demo():
                 file_extension = gr.Text(visible=False)
 
         doc = gr.State()
-        output = gr.Text(label="Output")
+        with gr.Column():
+            output = gr.Textbox(label="Output", lines=10, interactive=False, elem_id="output-textbox")
+            gr.HTML("""
+                    <button id="copy-button" onclick="
+                        const text = document.getElementById('output-textbox').querySelector('textarea').value;
+                        navigator.clipboard.writeText(text);
+                        const copiedMsg = document.getElementById('copied-msg');
+                        copiedMsg.style.display = 'inline';
+                        setTimeout(() => copiedMsg.style.display = 'none', 1500);
+                    " style="margin-top: 10px;">📋 Copy Output</button>
+                    <span id="copied-msg" style="margin-left: 10px; color: green; display: none;">Copied!</span>
+                    """)
 
         download_button = gr.DownloadButton("Download to file")
         download_status = gr.Markdown()
