@@ -44,7 +44,7 @@ This blueprint guides you to convert various unstructured documents (PDFs, DOCX,
 
   </details>
   <details>
-  <summary>Parse Images with SmolDocling</summary>
+  <summary>Parse Images / Code / Formulas</summary>
 
   - [Parse Images with SmolDocling](#parse-images-with-smoldocling)
   - [Parse Code](#parse-code)
