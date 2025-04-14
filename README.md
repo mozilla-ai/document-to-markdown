@@ -29,18 +29,6 @@
 
 This blueprint guides you to convert various unstructured documents (PDFs, DOCX, HTML, etc.) to markdown, or other, formats using the Docling CLI or a locally-hosted demo UI, with special attention to OCR capabilities and image handling options.
 
-### Pre-requisites
-
-- **System requirements**:
-  - OS: Windows, macOS, or Linux
-  - Python 3.10 or higher
-  - Minimum RAM: 8GB
-  - Disk space: 4GB for models and dependencies
-  - GPU: optional
-
-- **Dependencies**:
-  - All Python dependencies are installed automatically with Docling
-
 ## Quick-start
 
 Install Docling using pip:
@@ -63,12 +51,6 @@ For advanced OCR with multiple languages:
 
 ```bash
 docling path/to/document.pdf --ocr-lang en,fr,de
-```
-
-To use the SmolDocling Vision Language Model (VLM) pipeline:
-
-```bash
-docling path/to/document.pdf --pipeline vlm --vlm-model smoldocling
 ```
 
 ## How it Works
@@ -121,12 +103,31 @@ pip install ocrmac
 docling path/to/document.pdf --ocr-engine ocrmac
 ```
 
-### VLM Pipeline with SmolDocling
+### Parse Images with SmolDocling
 
-For complex documents, the Vision Language Model pipeline with [SmolDocling](https://huggingface.co/ds4sd/SmolDocling-256M-preview) can provide better results:
+Using the VLM Pipeline, we can use a Vision Language Model with [SmolDocling](https://huggingface.co/ds4sd/SmolDocling-256M-preview) to describe images:
 
 ```bash
 docling path/to/document.pdf --pipeline vlm --vlm-model smoldocling
+```
+
+We can also use [EfficientNet-B0 Document Image Classifier](https://huggingface.co/ds4sd/DocumentFigureClassifier) to classify images:
+
+```bash
+docling path/to/document.pdf --enrich-picture-classes
+```
+
+
+### Parse Code 
+
+```bash
+docling path/to/document.pdf --enrich-code
+```
+
+### Parse Formulas 
+
+```bash
+docling path/to/document.pdf --enrich-formula
 ```
 
 On Apple Silicon Macs, this automatically uses MLX acceleration for better performance.
@@ -166,6 +167,14 @@ Convert multiple files at once:
 ```bash
 docling ./documents/ --from pdf --to md --output ./markdown_files
 ```
+
+
+## Hardware requirements:
+  - OS: Windows, macOS, or Linux
+  - Python 3.10 or higher
+  - Minimum RAM: 8GB
+  - Disk space: 4GB for models and dependencies
+  - GPU: optional
 
 ## Troubleshooting
 
