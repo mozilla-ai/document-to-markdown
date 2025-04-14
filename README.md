@@ -31,42 +31,41 @@ This blueprint guides you to convert various unstructured documents (PDFs, DOCX,
 
 ## Table of Contents
 
-- [Parse and convert Documents with Docling](#parse-and-convert-documents-with-docling)
-  - [Quick-start](#quick-start)
-  - [How it Works](#how-it-works)
-  - [Features & Configuration](#features-configuration)
-    <details>
-    <summary>OCR Options</summary>
+- [Quick-start](#quick-start)
+- [How it Works](#how-it-works)
+- [Features & Configuration](#features-configuration)
+  <details>
+  <summary>OCR Options</summary>
 
-    - [EasyOCR (Default)](#easyocr-default)
-    - [Tesseract OCR](#tesseract-ocr)
-    - [RapidOCR](#rapidocr)
-    - [OcrMac (macOS only)](#ocrmac-macos-only)
+  - [EasyOCR (Default)](#easyocr-default)
+  - [Tesseract OCR](#tesseract-ocr)
+  - [RapidOCR](#rapidocr)
+  - [OcrMac (macOS only)](#ocrmac-macos-only)
 
-    </details>
-    <details>
-    <summary>Parse Images with SmolDocling</summary>
+  </details>
+  <details>
+  <summary>Parse Images with SmolDocling</summary>
 
-    - [Parse Images with SmolDocling](#parse-images-with-smoldocling)
-    - [Parse Code](#parse-code)
-    - [Parse Formulas](#parse-formulas)
+  - [Parse Images with SmolDocling](#parse-images-with-smoldocling)
+  - [Parse Code](#parse-code)
+  - [Parse Formulas](#parse-formulas)
 
-    </details>
-    <details>
-    <summary>Image Embedding Options</summary>
+  </details>
+  <details>
+  <summary>Image Embedding Options</summary>
 
-    - [Embedded Images (Data URLs)](#embedded-images-data-urls)
-    - [Referenced Images (Default)](#referenced-images-default)
-    - [Placeholder Images](#placeholder-images)
+  - [Embedded Images (Data URLs)](#embedded-images-data-urls)
+  - [Referenced Images (Default)](#referenced-images-default)
+  - [Placeholder Images](#placeholder-images)
 
-    </details>
+  </details>
     
-    - [Batch Processing](#batch-processing)
-  - [Hardware requirements](#hardware-requirements)
-  - [Troubleshooting](#troubleshooting)
-    - [OCR Issues](#ocr-issues)
-  - [License](#license)
-  - [Contributing](#contributing)
+  - [Batch Processing](#batch-processing)
+- [Hardware requirements](#hardware-requirements)
+- [Troubleshooting](#troubleshooting)
+  - [OCR Issues](#ocr-issues)
+- [License](#license)
+- [Contributing](#contributing)
 
 ## Quick-start
 
