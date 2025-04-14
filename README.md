@@ -33,7 +33,7 @@ This blueprint guides you to convert various unstructured documents (PDFs, DOCX,
 
 - [Quick-start](#quick-start)
 - [How it Works](#how-it-works)
-- [Features & Configuration](#features-configuration)
+- [Features & Configuration](#features--configuration)
   <details>
   <summary>OCR Options</summary>
 
