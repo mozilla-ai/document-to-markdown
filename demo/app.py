@@ -2,14 +2,17 @@ import json
 from typing import Dict, Tuple
 import os
 import gradio as gr
-import torch.cuda
 from docling.datamodel.base_models import InputFormat
-from docling.datamodel.pipeline_options import PdfPipelineOptions, AcceleratorDevice, \
-    EasyOcrOptions, TesseractOcrOptions, RapidOcrOptions, OcrMacOptions
+from docling.datamodel.pipeline_options import (
+    PdfPipelineOptions,
+    EasyOcrOptions,
+    TesseractOcrOptions,
+    RapidOcrOptions,
+    OcrMacOptions,
+)
 from docling.document_converter import DocumentConverter, PdfFormatOption
 from docling_core.types import DoclingDocument
 from docling.utils import model_downloader
-from docling.datamodel.pipeline_options import smolvlm_picture_description
 
 # Download models upon HF space initialization
 if os.getenv("IS_HF_SPACE"):
@@ -32,16 +35,15 @@ def parse_document(
 ) -> Tuple[DoclingDocument, str]:
     yield None, f"Parsing document... ⏳"
 
-    pipeline_options = PdfPipelineOptions()
-    pipeline_options.ocr_options = engines_available[engine]
+    pdf_pipeline_options = PdfPipelineOptions()
+    pdf_pipeline_options.ocr_options = engines_available[engine]
+    pdf_pipeline_options.do_code_enrichment = do_code_enrichment
+    pdf_pipeline_options.do_formula_enrichment = do_formula_enrichment
 
-    pipeline_options.do_code_enrichment = do_code_enrichment
-    pipeline_options.do_formula_enrichment = do_formula_enrichment
-
-    print(f"Pipeline options defined: \n\t{pipeline_options}")
+    print(f"PDF Pipeline options defined: \n\t{pdf_pipeline_options}")
     converter = DocumentConverter(
         format_options={
-            InputFormat.PDF: PdfFormatOption(pipeline_options=pipeline_options)
+            InputFormat.PDF: PdfFormatOption(pipeline_options=pdf_pipeline_options)
         }
     )
 
@@ -114,7 +116,7 @@ def setup_gradio_demo():
                 )
 
             with gr.Column():
-                gr.Markdown("### 2) Configure engine & Parse")
+                gr.Markdown("### 2) Configure engine (Only applicable for PDF files)")
 
                 ocr_engine = gr.Dropdown(
                     choices=list(engines_available.keys()), label="Select OCR engine"
