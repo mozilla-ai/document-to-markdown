@@ -16,6 +16,7 @@
 [![Docling](https://img.shields.io/badge/Docling-📝-orange)](https://github.com/docling-project/docling)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![](https://dcbadge.limes.pink/api/server/YuMNeuKStr?style=flat)](https://discord.gg/YuMNeuKStr) <br>
+[![Try on Spaces](https://img.shields.io/badge/%F0%9F%A4%97%20Try%20on-Spaces-blue)](https://huggingface.co/spaces/mozilla-ai/document-to-markdown)
 
 [Blueprints Hub](https://blueprints.mozilla.ai/)
 | [Documentation](https://github.com/mozilla-ai/document-to-markdown/README.md)
@@ -40,6 +41,38 @@ This blueprint guides you to convert various unstructured documents (PDFs, DOCX,
 - [Contributing](#contributing)
 
 ## Quick-start
+
+We have built a simple Graphical Interface demo of Docling to showcase some basic functionality. To utilize the full set of features, see section [Local CLI for the full Docling experience!](#local-cli-for-the-full-docling-experience) You can try the demo in two ways:
+
+### HF Spaces Demo 
+
+[![Try on Spaces](https://img.shields.io/badge/%F0%9F%A4%97%20Try%20on-Spaces-blue)](https://huggingface.co/spaces/mozilla-ai/document-to-markdown)
+
+### Local Demo
+
+You can also run the demo locally. First, clone the repository:
+
+```bash
+git clone https://github.com/mozilla-ai/document-to-markdown.git
+```
+
+Then, navigate to the directory, create a virtual environment and install the requirements:
+
+```bash
+cd document-to-markdown/demo
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+```
+
+Finally, run the demo:
+
+```bash
+python app.py
+```
+This will start a local server, and you can access the demo at `http://127.0.0.1:7860`.
+
+### Local CLI for the full Docling experience! 
 
 Install Docling using pip:
 
