@@ -19,7 +19,6 @@
 [![Try on Spaces](https://img.shields.io/badge/%F0%9F%A4%97%20Try%20on-Spaces-blue)](https://huggingface.co/spaces/mozilla-ai/document-to-markdown)
 
 [Blueprints Hub](https://blueprints.mozilla.ai/)
-| [Documentation](https://github.com/mozilla-ai/document-to-markdown/README.md)
 | [Contributing](CONTRIBUTING.md)
 
 🤝 **_This Blueprint was a result of an [EleutherAI](https://www.eleuther.ai/) <> [mozilla.ai](https://www.mozilla.ai/) collaboration, as part of their work on [Open Datasets for LLM Training](https://blog.mozilla.org/en/mozilla/dataset-convening/)_**.
