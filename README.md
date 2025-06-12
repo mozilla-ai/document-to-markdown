@@ -23,6 +23,8 @@
 
 🤝 **_This Blueprint was a result of an [EleutherAI](https://www.eleuther.ai/) <> [mozilla.ai](https://www.mozilla.ai/) collaboration, as part of their work on [Open Datasets for LLM Training](https://blog.mozilla.org/en/mozilla/dataset-convening/)_**.
 
+**_The tools & methods showcased in this blueprint were also part of EleutherAI's work on the [Common Pile 0.1](https://huggingface.co/collections/common-pile/common-pile-v01-68307d37df48e36f02717f21)_**.
+
 </div>
 
 # Parse and convert Documents with [Docling](https://github.com/docling-project/docling)
